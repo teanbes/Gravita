@@ -4,9 +4,8 @@ using UnityEngine;
 
 public abstract class Singleton<T> : MonoBehaviour where T : Component
 {
-    static T _instance;
-    // Start is called before the first frame update
-
+    private static T _instance;
+    
     public static T Instance
     {
         get

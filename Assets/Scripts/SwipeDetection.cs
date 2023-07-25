@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class SwipeDetection : MonoBehaviour
     [SerializeField] private float minDistance = 0.2f;
     [SerializeField] private float maxTime = 1f;
     [SerializeField] private GameObject trail;
+    [SerializeField] private PlayerController playerController;
 
     [SerializeField, Range(0f, 1f)] 
     private float directionThreshold = 0.9f;
@@ -21,11 +23,10 @@ public class SwipeDetection : MonoBehaviour
 
     private Coroutine coroutine;
 
-    public bool temp;//********************************* ojo
+    [SerializeField] public bool isSwipeUp;//********************************* ojo
 
     private void Awake()
     {
-
         inputManager = InputManager.Instance;
     }
 
@@ -41,6 +42,7 @@ public class SwipeDetection : MonoBehaviour
         inputManager.OnEndTouch -= SwipeEnd;
     }
 
+    // Swipe start position and time
     private void SwipeStart(Vector2 position, float time)
     {
         startPosition = position;
@@ -50,6 +52,7 @@ public class SwipeDetection : MonoBehaviour
         coroutine =  StartCoroutine("Trail");
     }
 
+    // Handles the trail renderer for visual notification
     private IEnumerator Trail()
     {
         while (true) 
@@ -59,6 +62,7 @@ public class SwipeDetection : MonoBehaviour
         }
     }
 
+    // Swipe end position and time
     private void SwipeEnd(Vector2 position, float time)
     {
         trail.SetActive(false);
@@ -68,6 +72,7 @@ public class SwipeDetection : MonoBehaviour
         DetectSwipe();
     }
 
+    // Detects if is a swipe or not
     public void DetectSwipe()
     {
         if (Vector3.Distance(startPosition, endPosition) >= minDistance && (endTime - startTime) <= maxTime)
@@ -78,19 +83,28 @@ public class SwipeDetection : MonoBehaviour
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
             SwipeDirection(direction2D);
         }
+
+        // Detection for tap on touchscreen
+        bool isTap = Vector3.Distance(startPosition, endPosition) < minDistance && (endTime - startTime) <= maxTime;
+        if(isTap) 
+        {
+            Debug.Log("Tap Detected");
+            playerController.Jump();
+            return;
+        }
     }
 
-
+    // Calculating the swipe direction
     private void SwipeDirection(Vector2 direction)
     {
         if(Vector2.Dot(Vector2.up, direction) > directionThreshold)
         {
-            temp = true;
+            isSwipeUp = true;
             Debug.Log("Swipe Up");
         }
         else if (Vector2.Dot(Vector2.down, direction) > directionThreshold)
         {
-            temp = false;
+            isSwipeUp = false;
             Debug.Log("Swipe down");
         }
         else if (Vector2.Dot(Vector2.left, direction) > directionThreshold)
@@ -102,5 +116,4 @@ public class SwipeDetection : MonoBehaviour
             Debug.Log("Swipe Right");
         }
     }
-
 }

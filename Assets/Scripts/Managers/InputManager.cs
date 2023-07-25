@@ -11,7 +11,7 @@ using static InputManager;
 public class InputManager : Singleton<InputManager>
 {
 
-    #region Events
+    #region Swipe Detection Events
     [HideInInspector] public delegate void StartTouch(Vector2 position, float time);
     [HideInInspector] public event StartTouch OnStartTouch;
 
@@ -19,7 +19,9 @@ public class InputManager : Singleton<InputManager>
     [HideInInspector] public event EndTouch OnEndTouch;
     #endregion
 
-    private PlayerInput playerInput;
+    [SerializeField] private PlayerController playerController;
+
+    [HideInInspector] public PlayerInput playerInput;
     private Camera mainCamera;
     
     protected override void Awake()
@@ -41,11 +43,12 @@ public class InputManager : Singleton<InputManager>
     }
     private void Start()
     {
-        playerInput.Touch.PrimaryContact.started += ctx => StartTouchPrimary(ctx);
+        playerInput.Touch.PrimaryContact.started += ctx => StartTouchPrimary(ctx); 
         playerInput.Touch.PrimaryContact.canceled += ctx => EndTouchPrimary(ctx);
+        
     }
 
-
+    // Calculates the starting posicion for swipe detection
     private void StartTouchPrimary(InputAction.CallbackContext context)
     {
         if (OnStartTouch != null)
@@ -54,18 +57,21 @@ public class InputManager : Singleton<InputManager>
         }
     }
 
-    private void EndTouchPrimary(InputAction.CallbackContext ctx)
+    // Calculates the end posicion for swipe detection
+    private void EndTouchPrimary(InputAction.CallbackContext context)
     {
         if (OnEndTouch != null)
         {
-            OnEndTouch(Utils.ScreenToWorld(mainCamera, playerInput.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)ctx.time);
+            OnEndTouch(Utils.ScreenToWorld(mainCamera, playerInput.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)context.time);
         }
     }
 
+    // Returns the touch position
     public Vector2 PrimaryPosition()
     {
         return Utils.ScreenToWorld(mainCamera, playerInput.Touch.PrimaryPosition.ReadValue<Vector2>());
     }
 
+   
 
 }
