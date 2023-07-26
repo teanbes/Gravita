@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-
+    [Header("Components")]
     [SerializeField] private SwipeDetection swipeDetection;
-
+    
     [Header("Player Data")]
     [SerializeField] private float jumpForce;
     [SerializeField] private float gravity;
@@ -23,11 +23,13 @@ public class PlayerController : MonoBehaviour
     private bool isCeiling;
 
     private Rigidbody2D rb;
+    private Animator animator;
 
-   
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
                
     }
 
