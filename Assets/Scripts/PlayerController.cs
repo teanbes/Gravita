@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,12 +25,14 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
+    private SpriteRenderer sr;
 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
                
     }
 
@@ -43,21 +46,41 @@ public class PlayerController : MonoBehaviour
         transform.position += movement * playerSpeed * Time.deltaTime;
       
         
-
+        // If player is in the ground
         if (isGrounded)
         {
+            
+            animator.SetBool("IsDash", false);// Stop Dash anim
+            sr.flipY = false; // Flip player to walk on the floor
+
+            // if swip down play dash anim, and change gravity
             if (swipeDetection.isSwipeUp == true)
+            {
+                animator.SetBool("IsDash", true);
                 rb.gravityScale = -gravity;
+
+            }
         }
+
+        // If player is in the ceiling
         if (isCeiling)
         {
-            if (swipeDetection.isSwipeUp == false)
+            animator.SetBool("IsDash", false);// Stop Dash anim
+            sr.flipY = true;// Flip player to walk on the ceiling
+
+            // if swip up play dash anim, and change gravity
+            if (swipeDetection.isSwipeUp == false) 
+            {
+                animator.SetBool("IsDash", true);
                 rb.gravityScale = gravity;
+            }
+
         }
     }
 
     public void Jump()
     {
+        rb.gravityScale = gravity * 0.04f;
         rb.AddForce(jumpForce * Vector2.up);
     }
 
