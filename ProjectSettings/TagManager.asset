@@ -13,8 +13,8 @@ TagManager:
   - UI
   - Ceiling
   - Player
-  - 
-  - 
+  - Stars
+  - Background
   - 
   - 
   - 
@@ -41,6 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: New Layer 1
+  - name: New Layer 2
+    uniqueID: 162122937
+    locked: 0
+  - name: Stars
     uniqueID: 2627411607
     locked: 0
