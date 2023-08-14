@@ -22,13 +22,13 @@ public class InputManager : Singleton<InputManager>
     [SerializeField] private PlayerController playerController;
 
     [HideInInspector] public PlayerInput playerInput;
-    private Camera mainCamera;
+    [SerializeField] private Camera mainCamera;
     
     protected override void Awake()
     {
         base.Awake();
         playerInput = new PlayerInput();
-        mainCamera = Camera.main;
+        //mainCamera = Camera.main;
 
     }
 
