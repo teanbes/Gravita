@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
             // if swip down play dash anim, and change gravity
             if (swipeDetection.isSwipeUp == true)
             {
+                AudioManager.Instance.Play("DashUp");
                 animator.SetBool("IsDash", true);
                 rb.gravityScale = -gravity;
 
@@ -71,6 +72,7 @@ public class PlayerController : MonoBehaviour
             // if swip up play dash anim, and change gravity
             if (swipeDetection.isSwipeUp == false) 
             {
+                AudioManager.Instance.Play("DashDown");
                 animator.SetBool("IsDash", true);
                 rb.gravityScale = gravity;
             }

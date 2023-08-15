@@ -28,8 +28,8 @@ public class InputManager : Singleton<InputManager>
     {
         base.Awake();
         playerInput = new PlayerInput();
-        //mainCamera = Camera.main;
-
+        mainCamera = Camera.main;
+       
     }
 
     private void OnEnable()
@@ -41,6 +41,7 @@ public class InputManager : Singleton<InputManager>
     {
         playerInput.Disable();
     }
+
     private void Start()
     {
         playerInput.Touch.PrimaryContact.started += ctx => StartTouchPrimary(ctx); 
