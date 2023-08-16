@@ -24,17 +24,17 @@ public class UIManager : MonoBehaviour
     [Header("Panel Components")]
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject settingsPanel;
-    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] public GameObject gameOverPanel;
     [SerializeField] private GameObject instructionsPanel;
     [SerializeField] private GameObject creditsPanel;
-    [SerializeField] private GameObject scorePanel;
+    [SerializeField] public GameObject scorePanel;
 
     [Header("Audio Components")]
     [SerializeField] private AudioSource backgroundMusic;
 
     [Header("Score Components")]
     [SerializeField] private TextMeshProUGUI currentScoreText;
-    private String scoreText;
+    public String scoreText;
     private float score;
     private float scoringTime;
     private float scoreMultiplier = 2.7f;
@@ -48,12 +48,11 @@ public class UIManager : MonoBehaviour
    
     private void Start()
     {
-        
-      
+
         if (playButton)
         {
             playButton.onClick.AddListener(() => Invoke("StartGame", 2f));
-            playButton.onClick.AddListener(() => AudioManager.Instance.Play("Player1Button"));
+            playButton.onClick.AddListener(() => AudioManager.Instance.Play("Select"));
         }
              
         if (instructionsButton)
@@ -77,10 +76,11 @@ public class UIManager : MonoBehaviour
         if (backButton)
             backButton.onClick.AddListener(BackToPauseMenu);
 
-
-        if (!backgroundMusic)
+        if (!backgroundMusic && SceneManager.GetActiveScene().buildIndex == 1)
             Debug.Log("Please set Background music file 1");
 
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+            UpdateScoreDisplay();
     }
 
 
@@ -98,12 +98,6 @@ public class UIManager : MonoBehaviour
             IncreaseScore(scoringTime);
             UpdateScoreDisplay();
         }
-
-        if (isDead)
-        {
-            PlayerDeath();
-        }
-
     }
 
     public void StartGame()
@@ -207,10 +201,7 @@ public class UIManager : MonoBehaviour
 
     public void PlayerDeath()
     {
-        gameOverPanel.SetActive(true);
-        Time.timeScale = 0;
-        PauseBackgorundMusic();
-        AudioManager.Instance.Play("GameOver");
+      
     }
 
 }

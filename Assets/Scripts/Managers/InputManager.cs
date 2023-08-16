@@ -35,18 +35,15 @@ public class InputManager : MonoBehaviour
     {
         playerInput = new PlayerInput();
         mainCamera = Camera.main;
-
-        if (_instance)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        _instance = this;
-        DontDestroyOnLoad(gameObject);
-
-        
-       
+      //
+      //  if (_instance)
+      //  {
+      //      Destroy(gameObject);
+      //      return;
+      //  }
+      //
+      //  _instance = this;
+      //  DontDestroyOnLoad(gameObject);
     }
 
     private void OnEnable()
