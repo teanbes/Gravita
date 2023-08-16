@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3329436248156985905}
-  - component: {fileID: 3329436248156985906}
   - component: {fileID: 3329436248156985904}
   m_Layer: 0
   m_Name: LevelGenerator
@@ -33,24 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3329436248156985906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3329436248156985907}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65853ec3ba7c2d6488f20dd3aac9eef3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelObject:
-  - {fileID: 6309834322047069596, guid: c6ce747ae197abf459be27438c6b2715, type: 3}
-  nextObjectRespawnPosition: {x: 0, y: 0}
-  player: {fileID: 0}
-  distanceToSpawn: 50
-  distanceToDestroy: 50
 --- !u!114 &3329436248156985904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelObject:
-  - {fileID: 6309834322047069596, guid: c6ce747ae197abf459be27438c6b2715, type: 3}
+  - {fileID: 478303646832038456, guid: e9256f210b611074bb9c2f89a96291c3, type: 3}
+  - {fileID: 6698501614575529631, guid: 998eeb453f0178b40a6b870e4d2281f0, type: 3}
+  - {fileID: 5273792140243744806, guid: d6f5eab147b13a64fa0a643a5636b20f, type: 3}
+  - {fileID: 401385574230673476, guid: 40b4d0cf2f201d04ab99508817cdd2ae, type: 3}
+  - {fileID: 3114743595984141862, guid: 3851da2ff8705f04b9477cab01f5c408, type: 3}
+  - {fileID: 8093609950869342357, guid: 81d59a0eb426dc844b093629b791cd21, type: 3}
   nextObjectRespawnPosition: {x: 0, y: 0}
   player: {fileID: 0}
   objectSpeed: 10

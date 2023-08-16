@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.Controls;
 using static InputManager;
 
 [DefaultExecutionOrder(-1)]
-public class InputManager : Singleton<InputManager>
+public class InputManager : MonoBehaviour
 {
 
     #region Swipe Detection Events
@@ -23,12 +23,29 @@ public class InputManager : Singleton<InputManager>
 
     [HideInInspector] public PlayerInput playerInput;
     [SerializeField] private Camera mainCamera;
-    
-    protected override void Awake()
+
+    private static InputManager _instance = null;
+
+    public static InputManager instance
     {
-        base.Awake();
+        get => _instance;
+    }
+
+    private void Awake()
+    {
         playerInput = new PlayerInput();
         mainCamera = Camera.main;
+
+        if (_instance)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        
        
     }
 

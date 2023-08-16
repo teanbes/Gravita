@@ -11,8 +11,7 @@ public class SwipeDetection : MonoBehaviour
     [SerializeField] private float minDistance = 0.2f;
     [SerializeField] private float maxTime = 1f;
     [SerializeField] private GameObject trail;
-    [SerializeField] private PlayerController playerController;
-
+    
     [SerializeField, Range(0f, 1f)] 
     private float directionThreshold = 0.9f;
 
@@ -23,6 +22,7 @@ public class SwipeDetection : MonoBehaviour
 
     private Coroutine coroutine;
 
+    [HideInInspector] public bool isTapped;
     [SerializeField] public bool isSwipeUp;//********************************* ojo
 
     private void Awake()
@@ -89,7 +89,7 @@ public class SwipeDetection : MonoBehaviour
         if(isTap) 
         {
             Debug.Log("Tap Detected");
-            playerController.Jump();
+            isTapped = true;
             return;
         }
     }
@@ -116,4 +116,5 @@ public class SwipeDetection : MonoBehaviour
             Debug.Log("Swipe Right");
         }
     }
+
 }

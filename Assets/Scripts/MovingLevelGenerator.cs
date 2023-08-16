@@ -10,7 +10,7 @@ public class MovingLevelGenerator : MonoBehaviour
     [SerializeField] private Vector2 nextObjectRespawnPosition;
     [SerializeField] private Transform player;
     [SerializeField] private float objectSpeed = 10.0f;
-    private Transform rndLevelObjectToSpawn;
+    private Transform firstLevelToSpawn;
     private Transform lasttLevelObjectSpawned;
     [SerializeField] private List<Transform> spawnedObjects;
     
@@ -19,9 +19,11 @@ public class MovingLevelGenerator : MonoBehaviour
 
     void Start()
     {
-        rndLevelObjectToSpawn = levelObject[Random.Range(0, levelObject.Length)];
-        lasttLevelObjectSpawned = Instantiate(rndLevelObjectToSpawn, transform.position, transform.rotation);
+        firstLevelToSpawn = levelObject[0];
+        lasttLevelObjectSpawned = Instantiate(firstLevelToSpawn, transform.position, transform.rotation);
         spawnedObjects.Add(lasttLevelObjectSpawned);
+        ExtraPartToSpawn(0);
+
     }
 
     // Update is called once per frame
@@ -72,5 +74,14 @@ public class MovingLevelGenerator : MonoBehaviour
                 spawnedObjects.Remove(objectToDestroy);
             }
         }
+    }
+
+    private void ExtraPartToSpawn(int partIndex)
+    {
+        Transform part = levelObject[partIndex];
+        Vector2 newPosition = new Vector2(lasttLevelObjectSpawned.position.x - part.Find("StartPosition").position.x, 0);
+        Transform newPart = Instantiate(part, newPosition, part.rotation, transform);
+        lasttLevelObjectSpawned = newPart.Find("EndPosition").transform;
+        spawnedObjects.Add(newPart);
     }
 }

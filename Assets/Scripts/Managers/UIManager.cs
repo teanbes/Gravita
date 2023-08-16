@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,6 +9,8 @@ using UnityEngine.UI;
 [DefaultExecutionOrder(-1)]
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get;  set; }
+
     [Header("Button")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button instructionsButton;
@@ -18,25 +21,41 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button quitButton;
     [SerializeField] private Button backButton;
 
-    [Header("Panel Elements")]
+    [Header("Panel Components")]
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject instructionsPanel;
     [SerializeField] private GameObject creditsPanel;
+    [SerializeField] private GameObject scorePanel;
 
-    [Header("Audio Elements")]
+    [Header("Audio Components")]
     [SerializeField] private AudioSource backgroundMusic;
-    
+
+    [Header("Score Components")]
+    [SerializeField] private TextMeshProUGUI currentScoreText;
+    private String scoreText;
+    private float score;
+    private float scoringTime;
+    private float scoreMultiplier = 2.7f;
+
 
     private bool isPaused;
     private bool isActive;
+    [HideInInspector] public bool isDead;
+
+
    
     private void Start()
     {
+        
+      
         if (playButton)
-            playButton.onClick.AddListener(StartGame);
-
+        {
+            playButton.onClick.AddListener(() => Invoke("StartGame", 2f));
+            playButton.onClick.AddListener(() => AudioManager.Instance.Play("Player1Button"));
+        }
+             
         if (instructionsButton)
             instructionsButton.onClick.AddListener(Instructions);
 
@@ -72,12 +91,23 @@ public class UIManager : MonoBehaviour
             AudioManager.Instance.Play("Select");
             PauseGame();
         }
-     
+
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            scoringTime = Time.time;
+            IncreaseScore(scoringTime);
+            UpdateScoreDisplay();
+        }
+
+        if (isDead)
+        {
+            PlayerDeath();
+        }
+
     }
 
     public void StartGame()
     {
-        AudioManager.Instance.Play("Select");
         SceneManager.LoadScene(1);
     }
 
@@ -132,6 +162,7 @@ public class UIManager : MonoBehaviour
     {
         isPaused = !isPaused;
         pausePanel.SetActive(isPaused);
+        scorePanel.SetActive(false);
 
         if (isPaused)
         {
@@ -143,6 +174,7 @@ public class UIManager : MonoBehaviour
         {
             AudioManager.Instance.Play("Select");
             Time.timeScale = 1;
+            scorePanel.SetActive(true);
             UnpauseBackgorundMusic();
         }
     }
@@ -160,6 +192,25 @@ public class UIManager : MonoBehaviour
     public void SetInactive()
     {
         GoBack();
+    }
+
+    //Score Manager functions
+    public void IncreaseScore(float amount)
+    {
+        score = (Mathf.Round(amount * scoreMultiplier)) ;
+    }
+    public void UpdateScoreDisplay()
+    {
+        scoreText = score.ToString();
+        currentScoreText.text = scoreText;
+    }
+
+    public void PlayerDeath()
+    {
+        gameOverPanel.SetActive(true);
+        Time.timeScale = 0;
+        PauseBackgorundMusic();
+        AudioManager.Instance.Play("GameOver");
     }
 
 }
