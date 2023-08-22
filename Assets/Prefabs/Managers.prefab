@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4093c2e5cddd824bbb1987da1a21e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  mainCamera: {fileID: 0}
 --- !u!114 &2671984055874116290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDistance: 0.2
   maxTime: 1
-  trail: {fileID: 1647272594786513998, guid: 948781148c400c149b837da8c13a0d61, type: 3}
+  trail: {fileID: 0}
   directionThreshold: 0.85
   isTapped: 0
   isSwipeUp: 0

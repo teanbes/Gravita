@@ -22,7 +22,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private PlayerController playerController;
 
     [HideInInspector] public PlayerInput playerInput;
-    [SerializeField] private Camera mainCamera;
+    private Camera mainCamera;
 
     private static InputManager _instance = null;
 
@@ -35,15 +35,7 @@ public class InputManager : MonoBehaviour
     {
         playerInput = new PlayerInput();
         mainCamera = Camera.main;
-      //
-      //  if (_instance)
-      //  {
-      //      Destroy(gameObject);
-      //      return;
-      //  }
-      //
-      //  _instance = this;
-      //  DontDestroyOnLoad(gameObject);
+   
     }
 
     private void OnEnable()

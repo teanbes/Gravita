@@ -34,12 +34,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Score Components")]
     [SerializeField] private TextMeshProUGUI currentScoreText;
-    public String scoreText;
-    private float score;
-    private float scoringTime;
-    private float scoreMultiplier = 2.7f;
-
-
+    private String scoreText;
+    
     private bool isPaused;
     private bool isActive;
     [HideInInspector] public bool isDead;
@@ -94,8 +90,6 @@ public class UIManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
-            scoringTime = Time.time;
-            IncreaseScore(scoringTime);
             UpdateScoreDisplay();
         }
     }
@@ -103,6 +97,7 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(1);
+        GameManager.instance.scoringTime = 0.0f;
     }
 
     private void GameSettings()
@@ -188,21 +183,10 @@ public class UIManager : MonoBehaviour
         GoBack();
     }
 
-    //Score Manager functions
-    public void IncreaseScore(float amount)
+     public void UpdateScoreDisplay()
     {
-        score = (Mathf.Round(amount * scoreMultiplier)) ;
-    }
-    public void UpdateScoreDisplay()
-    {
-        scoreText = score.ToString();
+        scoreText = GameManager.instance.scoreText;
         currentScoreText.text = scoreText;
     }
-
-    public void PlayerDeath()
-    {
-      
-    }
-
 }
 
