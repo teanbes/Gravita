@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     [Header("Components")]
     [SerializeField] private SwipeDetection swipeDetection;
     [SerializeField] public Animator animator;
+    [SerializeField] public UIManager uiManager;
+    [SerializeField] private GameObject tapToStartPanel;
+    [SerializeField] public MovingLevelGenerator movingLevelGenerator;
 
     [Header("Player Data")]
     [SerializeField] private float jumpForce;
@@ -45,17 +48,18 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool isCeiling;
     private bool isShooting;
-    
-    private Rigidbody2D rb;
+
+    [HideInInspector] public Rigidbody2D rb;
     private SpriteRenderer sr;
-    
+    private int levelSpeed = 7;
+
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         //animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-        GameManager.instance.movingLevelGenerator.objectSpeed = 0;
+        movingLevelGenerator.objectSpeed = 0;
         isDead = false;
         isStarted = false;
 
@@ -81,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
         if (!isStarted) 
         { 
-            GameManager.instance.uiManager.PauseBackgorundMusic(); 
+            uiManager.PauseBackgorundMusic(); 
             return;
         }
 
@@ -149,9 +153,9 @@ public class PlayerController : MonoBehaviour
     {
         // play death sound
         animator.SetBool("IsDead", true);
-        GameManager.instance.uiManager.PauseBackgorundMusic();
+        uiManager.PauseBackgorundMusic();
 
-        GameManager.instance.movingLevelGenerator.objectSpeed = -3;
+        movingLevelGenerator.objectSpeed = -3;
         
         foreach (Parallax P in parallaxs) 
         { 
@@ -162,7 +166,7 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         //Time.timeScale = 0;
-        GameManager.instance.movingLevelGenerator.objectSpeed = 0;
+        movingLevelGenerator.objectSpeed = 0;
         rb.velocity = new Vector2(0, 0);
         GameOver();
 
@@ -195,15 +199,22 @@ public class PlayerController : MonoBehaviour
     {
         if (!isStarted)
         {
+            isStarted = true;
+            tapToStartPanel.SetActive(false);
+            animator.SetBool("IsRunning", true);
+            movingLevelGenerator.objectSpeed = levelSpeed;
+            uiManager.UnpauseBackgorundMusic();
             GameManager.instance.isGameStarted = true;
         }
         
         if (isStarted && lastBulletFiredTime >= fireRate) 
         {
+            AudioManager.Instance.Play("Shoot");
             Projectile curProjectile = Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, projectileSpawnPoint.transform.rotation);
-
             lastBulletFiredTime = 0.0f;
         }
+
+
 
     }
 

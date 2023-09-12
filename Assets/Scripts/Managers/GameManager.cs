@@ -17,16 +17,14 @@ public class GameManager : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private PlayerController playerPrefab;
-    [SerializeField] public UIManager uiManager;
-    [SerializeField] private GameObject tapToStartPanel;
-    [SerializeField] public MovingLevelGenerator movingLevelGenerator;
+   
 
     [HideInInspector] public String scoreText;
     [HideInInspector] public float scoringTime;
     [HideInInspector] public bool isGameStarted;
     private float score;
     private float scoreMultiplier = 2.7f;
-    private int levelSpeed = 7;
+    
 
 
     public int coins;
@@ -56,15 +54,15 @@ public class GameManager : MonoBehaviour
 
         }
 
-        if (tapToStartPanel && isGameStarted)
-        {
-            playerPrefab.isStarted = true;
-            tapToStartPanel.SetActive(false);
-            playerPrefab.animator.SetBool("IsRunning", true);
-            movingLevelGenerator.objectSpeed = levelSpeed;
-            GameManager.instance.uiManager.UnpauseBackgorundMusic();
-            
-        }
+       // if (tapToStartPanel && isGameStarted)
+       // {
+       //     playerPrefab.isStarted = true;
+       //     tapToStartPanel.SetActive(false);
+       //     playerPrefab.animator.SetBool("IsRunning", true);
+       //     movingLevelGenerator.objectSpeed = levelSpeed;
+       //     GameManager.instance.uiManager.UnpauseBackgorundMusic();
+       //     
+       // }
     }
 
 

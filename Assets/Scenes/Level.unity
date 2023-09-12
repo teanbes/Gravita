@@ -6226,7 +6226,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2671984055874116288, guid: b2945bf7e3356f449bde7cbac23579c7, type: 3}
       propertyPath: sounds.Array.size
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2671984055874116288, guid: b2945bf7e3356f449bde7cbac23579c7, type: 3}
       propertyPath: sounds.Array.data[5].clip
@@ -6237,11 +6237,43 @@ PrefabInstance:
       value: Coin
       objectReference: {fileID: 0}
     - target: {fileID: 2671984055874116288, guid: b2945bf7e3356f449bde7cbac23579c7, type: 3}
+      propertyPath: sounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ce129d24f258ca47bd800a22646eb35, type: 3}
+    - target: {fileID: 2671984055874116288, guid: b2945bf7e3356f449bde7cbac23579c7, type: 3}
+      propertyPath: sounds.Array.data[6].name
+      value: ProjectileHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671984055874116288, guid: b2945bf7e3356f449bde7cbac23579c7, type: 3}
+      propertyPath: sounds.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2a5133fc49fcbcf4f86a78bb4e48ba33, type: 3}
+    - target: {fileID: 2671984055874116288, guid: b2945bf7e3356f449bde7cbac23579c7, type: 3}
+      propertyPath: sounds.Array.data[7].name
+      value: Shoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671984055874116288, guid: b2945bf7e3356f449bde7cbac23579c7, type: 3}
       propertyPath: sounds.Array.data[5].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2671984055874116288, guid: b2945bf7e3356f449bde7cbac23579c7, type: 3}
+      propertyPath: sounds.Array.data[6].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671984055874116288, guid: b2945bf7e3356f449bde7cbac23579c7, type: 3}
+      propertyPath: sounds.Array.data[7].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671984055874116288, guid: b2945bf7e3356f449bde7cbac23579c7, type: 3}
       propertyPath: sounds.Array.data[5].volume
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671984055874116288, guid: b2945bf7e3356f449bde7cbac23579c7, type: 3}
+      propertyPath: sounds.Array.data[6].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2671984055874116288, guid: b2945bf7e3356f449bde7cbac23579c7, type: 3}
+      propertyPath: sounds.Array.data[7].volume
       value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 2671984055874116290, guid: b2945bf7e3356f449bde7cbac23579c7, type: 3}
@@ -6326,13 +6358,25 @@ PrefabInstance:
       value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2943725821168034828, guid: b8f42aae948c4e34daa27469855e999c, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 109295698}
+    - target: {fileID: 2943725821168034828, guid: b8f42aae948c4e34daa27469855e999c, type: 3}
       propertyPath: swipeDetection
       value: 
       objectReference: {fileID: 121650768}
     - target: {fileID: 2943725821168034828, guid: b8f42aae948c4e34daa27469855e999c, type: 3}
+      propertyPath: tapToStartPanel
+      value: 
+      objectReference: {fileID: 1235474083}
+    - target: {fileID: 2943725821168034828, guid: b8f42aae948c4e34daa27469855e999c, type: 3}
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: -4059455314973819031, guid: 2ee79234bfa1b9d439b54471865229bd, type: 3}
+    - target: {fileID: 2943725821168034828, guid: b8f42aae948c4e34daa27469855e999c, type: 3}
+      propertyPath: movingLevelGenerator
+      value: 
+      objectReference: {fileID: 1500345472}
     - target: {fileID: 2943725821168034828, guid: b8f42aae948c4e34daa27469855e999c, type: 3}
       propertyPath: projectileSpawnPoint
       value: 
