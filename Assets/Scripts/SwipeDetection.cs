@@ -22,6 +22,13 @@ public class SwipeDetection : MonoBehaviour
 
     private Coroutine coroutine;
 
+    #region
+    public event Action SwipeUpEvent;
+    public event Action SwipeDownEvent;
+    public event Action SwipeForwardEvent;
+    public event Action TapEvent;
+    #endregion
+
     [HideInInspector] public bool isTapped;
     [SerializeField] public bool isSwipeUp;//********************************* ojo
 
@@ -86,10 +93,10 @@ public class SwipeDetection : MonoBehaviour
 
         // Detection for tap on touchscreen
         bool isTap = Vector3.Distance(startPosition, endPosition) < minDistance && (endTime - startTime) <= maxTime;
-        if(isTap) 
+        if (isTap) 
         {
             Debug.Log("Tap Detected");
-            isTapped = true;
+            TapEvent?.Invoke();
             return;
         }
     }
@@ -97,15 +104,13 @@ public class SwipeDetection : MonoBehaviour
     // Calculating the swipe direction
     private void SwipeDirection(Vector2 direction)
     {
-        if(Vector2.Dot(Vector2.up, direction) > directionThreshold)
+        if (Vector2.Dot(Vector2.up, direction) > directionThreshold)
         {
-            isSwipeUp = true;
-            Debug.Log("Swipe Up");
+            SwipeUpEvent?.Invoke();
         }
         else if (Vector2.Dot(Vector2.down, direction) > directionThreshold)
         {
-            isSwipeUp = false;
-            Debug.Log("Swipe down");
+            SwipeDownEvent?.Invoke();
         }
         else if (Vector2.Dot(Vector2.left, direction) > directionThreshold)
         {
@@ -113,7 +118,8 @@ public class SwipeDetection : MonoBehaviour
         }
         else if (Vector2.Dot(Vector2.right, direction) > directionThreshold)
         {
-            Debug.Log("Swipe Right");
+            SwipeForwardEvent?.Invoke();
+            Debug.Log("Swipe Forward");
         }
     }
 

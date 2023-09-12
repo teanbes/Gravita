@@ -8,7 +8,6 @@ using static Cinemachine.DocumentationSortingAttribute;
 [DefaultExecutionOrder(1)]
 public class GameManager : MonoBehaviour
 {
-
     private static GameManager _instance = null;
 
     public static GameManager instance
@@ -16,14 +15,21 @@ public class GameManager : MonoBehaviour
         get => _instance;
     }
 
-    public PlayerController playerPrefab;
-    [HideInInspector] public PlayerController playerInstance = null;
-    [HideInInspector] public Transform currentSpawnPoint;
+    [Header("Components")]
+    [SerializeField] private PlayerController playerPrefab;
+    [SerializeField] public UIManager uiManager;
+    [SerializeField] private GameObject tapToStartPanel;
+    [SerializeField] public MovingLevelGenerator movingLevelGenerator;
 
     [HideInInspector] public String scoreText;
     [HideInInspector] public float scoringTime;
+    [HideInInspector] public bool isGameStarted;
     private float score;
     private float scoreMultiplier = 2.7f;
+    private int levelSpeed = 7;
+
+
+    public int coins;
 
 
     private void Awake()
@@ -40,14 +46,26 @@ public class GameManager : MonoBehaviour
 
    
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 1 && isGameStarted)
         {
             scoringTime += Time.deltaTime;
             score = (Mathf.Round(scoringTime * scoreMultiplier));
             scoreText = score.ToString();
 
         }
+
+        if (tapToStartPanel && isGameStarted)
+        {
+            playerPrefab.isStarted = true;
+            tapToStartPanel.SetActive(false);
+            playerPrefab.animator.SetBool("IsRunning", true);
+            movingLevelGenerator.objectSpeed = levelSpeed;
+            GameManager.instance.uiManager.UnpauseBackgorundMusic();
+            
+        }
     }
+
+
 }

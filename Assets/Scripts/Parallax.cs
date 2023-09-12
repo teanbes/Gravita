@@ -8,7 +8,7 @@ public class Parallax : MonoBehaviour
     private float distance;
 
     [Range(0f, 1f)]
-    [SerializeField] private float speed = 0.2f;
+    [SerializeField] public float speed = 0.2f;
 
     private void Start()
     {

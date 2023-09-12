@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Score Components")]
     [SerializeField] private TextMeshProUGUI currentScoreText;
+    [SerializeField] private TextMeshProUGUI currentCoins;
     private String scoreText;
     
     private bool isPaused;
@@ -119,7 +120,13 @@ public class UIManager : MonoBehaviour
     }
     public void GameQuit()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        SceneManager.LoadScene(0);
+        //UnityEditor.EditorApplication.isPlaying = false;
+    }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene(2);
     }
 
     public void Credits()
@@ -185,8 +192,8 @@ public class UIManager : MonoBehaviour
 
      public void UpdateScoreDisplay()
     {
-        scoreText = GameManager.instance.scoreText;
-        currentScoreText.text = scoreText;
+        currentScoreText.text = GameManager.instance.scoreText;
+        currentCoins.text = GameManager.instance.coins.ToString();
     }
 }
 

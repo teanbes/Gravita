@@ -6,13 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class DeadZone : MonoBehaviour
 {
-   
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.GetComponent<PlayerController>())
         {
-            SceneManager.LoadScene(2);
+            var playerController = collision.GetComponent<PlayerController>();
+            playerController.isDead = true;
         }
     }
 }

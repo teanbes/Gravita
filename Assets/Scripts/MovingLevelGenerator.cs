@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class MovingLevelGenerator : MonoBehaviour
 {
+    [SerializeField] private Transform startPart;
+
     [SerializeField] private Transform[] levelObject;
     [SerializeField] private Vector2 nextObjectRespawnPosition;
     [SerializeField] private Transform player;
-    [SerializeField] private float objectSpeed = 10.0f;
+    [SerializeField] public float objectSpeed = 10.0f;
     private Transform firstLevelToSpawn;
     private Transform lasttLevelObjectSpawned;
     [SerializeField] private List<Transform> spawnedObjects;
@@ -19,7 +20,7 @@ public class MovingLevelGenerator : MonoBehaviour
 
     void Start()
     {
-        firstLevelToSpawn = levelObject[0];
+        firstLevelToSpawn = startPart;
         lasttLevelObjectSpawned = Instantiate(firstLevelToSpawn, transform.position, transform.rotation);
         spawnedObjects.Add(lasttLevelObjectSpawned);
         ExtraPartToSpawn(0);
