@@ -24,7 +24,6 @@ public class MovingLevelGenerator : MonoBehaviour
         lasttLevelObjectSpawned = Instantiate(firstLevelToSpawn, transform.position, transform.rotation);
         spawnedObjects.Add(lasttLevelObjectSpawned);
         ExtraPartToSpawn(0);
-
     }
 
     // Update is called once per frame
@@ -67,7 +66,7 @@ public class MovingLevelGenerator : MonoBehaviour
         {
             if (validParts.Count > 0)
             {
-                // Randomly select a valid level part
+                // Randomly select a valid level part of the current difficulty
                 Transform selectedPart = validParts[Random.Range(0, validParts.Count)];
                 Vector2 newPosition = new Vector2(lasttLevelObjectSpawned.position.x - selectedPart.Find("StartPosition").position.x, 0);
                 Transform newPart = Instantiate(selectedPart, newPosition, selectedPart.rotation, transform);
@@ -75,16 +74,6 @@ public class MovingLevelGenerator : MonoBehaviour
                 spawnedObjects.Add(newPart);
             }
         }
-
-
-        /*while (Vector2.Distance(lasttLevelObjectSpawned.position, player.transform.position) < distanceToSpawn)
-        {
-            Transform part = levelObject[Random.Range(0, levelObject.Length)];
-            Vector2 newPosition = new Vector2(lasttLevelObjectSpawned.position.x - part.Find("StartPosition").position.x, 0);
-            Transform newPart = Instantiate(part, newPosition, part.rotation, transform);
-            lasttLevelObjectSpawned = newPart.Find("EndPosition").transform;
-            spawnedObjects.Add(newPart);
-        }*/
     }
 
     // Destroys platforms generated after they are off screen
