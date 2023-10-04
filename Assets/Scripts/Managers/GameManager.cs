@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static Cinemachine.DocumentationSortingAttribute;
+using Debug = UnityEngine.Debug;
 
 [DefaultExecutionOrder(1)]
 public class GameManager : MonoBehaviour
@@ -17,18 +19,16 @@ public class GameManager : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private PlayerController playerPrefab;
-   
 
     [HideInInspector] public String scoreText;
     [HideInInspector] public float scoringTime;
     [HideInInspector] public bool isGameStarted;
+    [HideInInspector] public int difficulty;
+    [HideInInspector] public int numDifficultyLevels = 3; // test value
     private float score;
     private float scoreMultiplier = 2.7f;
-    
-
 
     public int coins;
-
 
     private void Awake()
     {
@@ -42,7 +42,12 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-   
+    private void Start()
+    {
+        difficulty = 1;
+    }
+
+
     // Update is called once per frame
     private void Update()
     {
@@ -51,19 +56,19 @@ public class GameManager : MonoBehaviour
             scoringTime += Time.deltaTime;
             score = (Mathf.Round(scoringTime * scoreMultiplier));
             scoreText = score.ToString();
+            DifficultyLevel();
+            Debug.Log("difficulty" + difficulty);
 
         }
-
-       // if (tapToStartPanel && isGameStarted)
-       // {
-       //     playerPrefab.isStarted = true;
-       //     tapToStartPanel.SetActive(false);
-       //     playerPrefab.animator.SetBool("IsRunning", true);
-       //     movingLevelGenerator.objectSpeed = levelSpeed;
-       //     GameManager.instance.uiManager.UnpauseBackgorundMusic();
-       //     
-       // }
     }
 
+    private void DifficultyLevel()
+    {
+        if (score > 10 && score < 20) // temp values for testing
+            difficulty = 2;
+
+        if (score >=20) // temp values for testing
+            difficulty = 3;
+    }
 
 }

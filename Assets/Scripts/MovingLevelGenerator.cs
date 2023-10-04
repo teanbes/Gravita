@@ -5,10 +5,10 @@ using UnityEngine.EventSystems;
 
 public class MovingLevelGenerator : MonoBehaviour
 {
+    [Header("Components")]
     [SerializeField] private Transform startPart;
-
     [SerializeField] private Transform[] levelObject;
-    [SerializeField] private Vector2 nextObjectRespawnPosition;
+
     [SerializeField] private Transform player;
     [SerializeField] public float objectSpeed = 10.0f;
     private Transform firstLevelToSpawn;
@@ -30,7 +30,6 @@ public class MovingLevelGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
- 
         GeneratePlatform();
         MoveLevelPart();
         DestroyPlatform();
@@ -43,8 +42,7 @@ public class MovingLevelGenerator : MonoBehaviour
         {
             foreach (Transform transform in spawnedObjects)
             {
-                Vector3 moveDirection = new Vector3(1.0f, 0.0f, 0.0f);
-                transform.position += moveDirection * -objectSpeed * Time.deltaTime;
+                transform.position += Vector3.left * objectSpeed * Time.deltaTime;
             }
         }
     }
@@ -52,14 +50,41 @@ public class MovingLevelGenerator : MonoBehaviour
     // Generates random platform to spawn when player reach boundary
     private void GeneratePlatform()
     {
+        int currentDifficulty = GameManager.instance.difficulty;
+        List<Transform> validParts = new List<Transform>();
+
+        // Iterate through levelObject array and add parts with matching difficulty
+        foreach (Transform part in levelObject)
+        {
+            LevelPart levelPart = part.GetComponent<LevelPart>();
+            if (levelPart != null && levelPart.difficulty == currentDifficulty)
+            {
+                validParts.Add(part);
+            }
+        }
+
         while (Vector2.Distance(lasttLevelObjectSpawned.position, player.transform.position) < distanceToSpawn)
+        {
+            if (validParts.Count > 0)
+            {
+                // Randomly select a valid level part
+                Transform selectedPart = validParts[Random.Range(0, validParts.Count)];
+                Vector2 newPosition = new Vector2(lasttLevelObjectSpawned.position.x - selectedPart.Find("StartPosition").position.x, 0);
+                Transform newPart = Instantiate(selectedPart, newPosition, selectedPart.rotation, transform);
+                lasttLevelObjectSpawned = newPart.Find("EndPosition").transform;
+                spawnedObjects.Add(newPart);
+            }
+        }
+
+
+        /*while (Vector2.Distance(lasttLevelObjectSpawned.position, player.transform.position) < distanceToSpawn)
         {
             Transform part = levelObject[Random.Range(0, levelObject.Length)];
             Vector2 newPosition = new Vector2(lasttLevelObjectSpawned.position.x - part.Find("StartPosition").position.x, 0);
             Transform newPart = Instantiate(part, newPosition, part.rotation, transform);
             lasttLevelObjectSpawned = newPart.Find("EndPosition").transform;
             spawnedObjects.Add(newPart);
-        }
+        }*/
     }
 
     // Destroys platforms generated after they are off screen

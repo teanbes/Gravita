@@ -1112,6 +1112,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 478303646832038456}
+  - component: {fileID: 6907021788237036189}
   m_Layer: 0
   m_Name: LevelPart (3)
   m_TagString: Untagged
@@ -1147,6 +1148,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6907021788237036189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5437637746878778886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96c35592643409a4583bf037ea9b10d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  part: {fileID: 478303646832038456}
+  difficulty: 1
 --- !u!1 &7665621888641814126
 GameObject:
   m_ObjectHideFlags: 0
