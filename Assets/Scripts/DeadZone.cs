@@ -13,6 +13,7 @@ public class DeadZone : MonoBehaviour
         if (collision.GetComponent<PlayerController>())
         {
             var playerController = collision.GetComponent<PlayerController>();
+            playerController.Die();
             playerController.isDead = true;
             playerController.rb.gravityScale = 0;
         }

@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 using static InputManager;
 
 [DefaultExecutionOrder(-1)]
@@ -55,16 +51,17 @@ public class InputManager : MonoBehaviour
         
     }
 
-    // Calculates the starting posicion for swipe detection
+    // Calculates the starting position for swipe detection
     private void StartTouchPrimary(InputAction.CallbackContext context)
     {
         if (OnStartTouch != null)
         {
+            //await Task.Delay(50);
             OnStartTouch(Utils.ScreenToWorld(mainCamera, playerInput.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)context.startTime);
         }
     }
 
-    // Calculates the end posicion for swipe detection
+    // Calculates the end position for swipe detection
     private void EndTouchPrimary(InputAction.CallbackContext context)
     {
         if (OnEndTouch != null)
@@ -78,7 +75,4 @@ public class InputManager : MonoBehaviour
     {
         return Utils.ScreenToWorld(mainCamera, playerInput.Touch.PrimaryPosition.ReadValue<Vector2>());
     }
-
-   
-
 }

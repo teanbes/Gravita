@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 2d357ed942a805246b8a48dad9f4829d, type: 3}
-  m_Color: {r: 0.94864726, g: 0.9586676, b: 0.9622642, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -102,8 +102,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.035888433, y: -0.6688607}
-  m_Size: {x: 0.9756236, y: 1.5357027}
+  m_Offset: {x: -0.035888433, y: -0.1161381}
+  m_Size: {x: 0.9756236, y: 2.6411479}
   m_Direction: 0
 --- !u!50 &2943725821168034866
 Rigidbody2D:
@@ -140,6 +140,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swipeDetection: {fileID: 0}
   animator: {fileID: 2943725821168034829}
+  uiManager: {fileID: 0}
+  tapToStartPanel: {fileID: 0}
+  movingLevelGenerator: {fileID: 0}
   jumpForce: 5
   gravity: 50
   collisionCheckDistance: 1.51
@@ -158,7 +161,11 @@ MonoBehaviour:
   - {fileID: 0}
   levelSpeedOnDeath: 0
   isDead: 0
+  projectileSpawnPoint: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  fireRate: 2
   isStarted: 0
+  rb: {fileID: 0}
 --- !u!95 &2943725821168034829
 Animator:
   serializedVersion: 5

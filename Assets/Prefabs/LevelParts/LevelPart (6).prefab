@@ -2002,6 +2002,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ElevatorDoorR
       objectReference: {fileID: 0}
+    - target: {fileID: 4448788814390923983, guid: d3b8ea2732d815546ad2f3db2344b1a9, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448788814390923983, guid: d3b8ea2732d815546ad2f3db2344b1a9, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448788814390923983, guid: d3b8ea2732d815546ad2f3db2344b1a9, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4753030535885287416, guid: d3b8ea2732d815546ad2f3db2344b1a9, type: 3}
       propertyPath: m_RootOrder
       value: 12

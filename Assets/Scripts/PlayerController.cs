@@ -111,11 +111,11 @@ public class PlayerController : MonoBehaviour
 
         SlideCheck();
 
-        if (isDead) 
-        {
-            StartCoroutine(Die());
-           
-        }
+       //if (isDead) 
+       //{
+       //    StartCoroutine(Die());
+       //   
+       //}
 
     }
 
@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // need to change this to game manager
-    public IEnumerator Die()
+    public void Die()
     {
         // play death sound
         animator.SetBool("IsDead", true);
@@ -164,11 +164,14 @@ public class PlayerController : MonoBehaviour
 
         //rb.velocity = Vector3.left * 1.5f;
 
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
+
         //Time.timeScale = 0;
         movingLevelGenerator.objectSpeed = 0;
         rb.velocity = new Vector2(0, 0);
-        GameOver();
+
+        AdsManager.instance.RewardAd.LoadAd();
+        //GameOver();
 
     }
 

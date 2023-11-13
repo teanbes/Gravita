@@ -154,7 +154,8 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Standalone: com.DefaultCompany.Gravita-VGP202
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -734,11 +735,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: c80ac0bc-e22d-4222-a34e-4f98991a39c7
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: Gravita_Test
+  organizationId: teanbes
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
