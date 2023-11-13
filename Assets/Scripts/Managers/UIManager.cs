@@ -48,7 +48,7 @@ public class UIManager : MonoBehaviour
 
         if (playButton)
         {
-            playButton.onClick.AddListener(() => Invoke("StartGame", 2f));
+            playButton.onClick.AddListener(() => Invoke("StartGame", 1f));
             playButton.onClick.AddListener(() => AudioManager.Instance.Play("Select"));
         }
              
@@ -97,7 +97,12 @@ public class UIManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void LoadGame()
+    {
+        SceneManager.LoadScene("Level");
         GameManager.instance.scoringTime = 0.0f;
     }
 
@@ -126,7 +131,7 @@ public class UIManager : MonoBehaviour
 
     public void GameOver()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("GameOver");
     }
 
     public void Credits()

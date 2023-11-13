@@ -170,8 +170,8 @@ public class PlayerController : MonoBehaviour
         movingLevelGenerator.objectSpeed = 0;
         rb.velocity = new Vector2(0, 0);
 
-        AdsManager.instance.RewardAd.LoadAd();
-        //GameOver();
+        //AdsManager.instance.RewardAd.LoadAd();
+        GameOver();
 
     }
 
