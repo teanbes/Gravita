@@ -51,8 +51,8 @@ public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener
 
     public void OnInitializationComplete()
     {
-        RewardAd.LoadAd();
-        BannerAd.LoadBanner();
+        //RewardAd.LoadAd();
+        //BannerAd.LoadBanner();
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)

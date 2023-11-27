@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sr;
     private int levelSpeed = 7;
 
+    // test***
+    [SerializeField] private Transform playerContinuePosition;
 
     private void Start()
     {
@@ -83,7 +85,7 @@ public class PlayerController : MonoBehaviour
     {
         lastBulletFiredTime += Time.deltaTime;
 
-        if (!isStarted) 
+        if (!isStarted && !isDead) 
         { 
             uiManager.PauseBackgorundMusic(); 
             return;
@@ -170,8 +172,11 @@ public class PlayerController : MonoBehaviour
         movingLevelGenerator.objectSpeed = 0;
         rb.velocity = new Vector2(0, 0);
 
-        //AdsManager.instance.RewardAd.LoadAd();
-        GameOver();
+       
+        uiManager.scorePanel.SetActive(false);
+        uiManager.gameOverPanel.SetActive(true);
+        GameManager.instance.isGameStarted = false;
+       
 
     }
 
@@ -200,17 +205,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnTap()
     {
-        if (!isStarted)
+        if (!isStarted && !isDead)
         {
             isStarted = true;
             tapToStartPanel.SetActive(false);
             animator.SetBool("IsRunning", true);
             movingLevelGenerator.objectSpeed = levelSpeed;
             uiManager.UnpauseBackgorundMusic();
+            rb.gravityScale = gravity;
             GameManager.instance.isGameStarted = true;
         }
         
-        if (isStarted && lastBulletFiredTime >= fireRate) 
+        if (isStarted && lastBulletFiredTime >= fireRate && !isDead) 
         {
             AudioManager.Instance.Play("Shoot");
             Projectile curProjectile = Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, projectileSpawnPoint.transform.rotation);
@@ -226,6 +232,20 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y - collisionCheckDistance));
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y + collisionCheckDistance));
+
+    }
+
+    public void RestartFromDeadPosition()
+    {
+        transform.position = playerContinuePosition.position;
+        tapToStartPanel.SetActive(true);
+        isDead = false;
+        isStarted = false;
+        sr.flipY = false; // Flip player to walk on the floor
+        animator.SetBool("IsDead", false);
+        animator.SetBool("IsRunning", false);
+        uiManager.UnpauseBackgorundMusic();
+        uiManager.gameOverPanel.SetActive(false);
 
     }
 

@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private Button backButton;
+    [SerializeField] private Button watchAdButton;
 
     [Header("Panel Components")]
     [SerializeField] private GameObject pausePanel;
@@ -35,6 +36,8 @@ public class UIManager : MonoBehaviour
     [Header("Score Components")]
     [SerializeField] private TextMeshProUGUI currentScoreText;
     [SerializeField] private TextMeshProUGUI currentCoins;
+    [SerializeField] private TextMeshProUGUI currentScoreTextDeadPanel;
+    [SerializeField] private TextMeshProUGUI currentCoinsDeadPanel;
     private String scoreText;
     
     private bool isPaused;
@@ -73,6 +76,9 @@ public class UIManager : MonoBehaviour
         if (backButton)
             backButton.onClick.AddListener(BackToPauseMenu);
 
+        if (watchAdButton)
+            watchAdButton.onClick.AddListener(WatchAd);
+
         if (!backgroundMusic && SceneManager.GetActiveScene().buildIndex == 1)
             Debug.Log("Please set Background music file 1");
 
@@ -80,6 +86,7 @@ public class UIManager : MonoBehaviour
             UpdateScoreDisplay();
     }
 
+   
 
     private void Update()
     {
@@ -195,10 +202,19 @@ public class UIManager : MonoBehaviour
         GoBack();
     }
 
-     public void UpdateScoreDisplay()
+    public void UpdateScoreDisplay()
     {
         currentScoreText.text = GameManager.instance.scoreText;
         currentCoins.text = GameManager.instance.coins.ToString();
+        currentScoreTextDeadPanel.text = GameManager.instance.scoreText;
+        currentCoinsDeadPanel.text = GameManager.instance.coins.ToString();
+
+    }
+
+    private void WatchAd()
+    {
+        Debug.Log("playing add");
+        AdsManager.instance.RewardAd.LoadAd();
     }
 }
 

@@ -437,11 +437,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 0}
-  uiManager: {fileID: 0}
-  playerInstance: {fileID: 0}
-  currentSpawnPoint: {fileID: 0}
   scoreText: 
   scoringTime: 0
+  isGameStarted: 0
+  difficulty: 0
+  numDifficultyLevels: 3
   coins: 0
 --- !u!4 &2014765199
 Transform:
@@ -1366,6 +1366,7 @@ MonoBehaviour:
   settingsButton: {fileID: 0}
   quitButton: {fileID: 7949377574574628353}
   backButton: {fileID: 0}
+  watchAdButton: {fileID: 0}
   pausePanel: {fileID: 0}
   settingsPanel: {fileID: 0}
   gameOverPanel: {fileID: 0}
