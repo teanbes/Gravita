@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject instructionsPanel;
     [SerializeField] private GameObject creditsPanel;
     [SerializeField] public GameObject scorePanel;
+    [SerializeField] public GameObject rewardWheelPanel;
 
     [Header("Audio Components")]
     [SerializeField] private AudioSource backgroundMusic;
@@ -100,6 +101,13 @@ public class UIManager : MonoBehaviour
         {
             UpdateScoreDisplay();
         }
+
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            UpdateScoreDisplayMainMenu();
+        }
+
+
     }
 
     public void StartGame()
@@ -109,8 +117,14 @@ public class UIManager : MonoBehaviour
 
     public void LoadGame()
     {
+        GameManager.instance.scoringTime = 0;
+        currentScoreText.text = " ";
+        GameManager.instance.currentLevelScore = 0.0f;
+        GameManager.instance.levelCoins = 0;
+        GameManager.instance.scoreText = " ";
+
         SceneManager.LoadScene("Level");
-        GameManager.instance.scoringTime = 0.0f;
+        
     }
 
     private void GameSettings()
@@ -132,7 +146,9 @@ public class UIManager : MonoBehaviour
     }
     public void GameQuit()
     {
-        SceneManager.LoadScene(0);
+        GameManager.instance.totalGameCoins += GameManager.instance.levelCoins;
+        GameManager.instance.totalScore += GameManager.instance.currentLevelScore;
+        SceneManager.LoadScene("MainMenu");
         //UnityEditor.EditorApplication.isPlaying = false;
     }
 
@@ -204,12 +220,37 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScoreDisplay()
     {
-        currentScoreText.text = GameManager.instance.scoreText;
-        currentCoins.text = GameManager.instance.coins.ToString();
-        currentScoreTextDeadPanel.text = GameManager.instance.scoreText;
-        currentCoinsDeadPanel.text = GameManager.instance.coins.ToString();
+        if (currentScoreText)
+            currentScoreText.text = GameManager.instance.scoreText;
+
+        if (currentCoins)
+            currentCoins.text = GameManager.instance.levelCoins.ToString();
+
+        if (currentScoreTextDeadPanel)
+            currentScoreTextDeadPanel.text = GameManager.instance.scoreText;
+
+        if (currentCoinsDeadPanel)
+            currentCoinsDeadPanel.text = GameManager.instance.levelCoins.ToString();
 
     }
+
+    public void UpdateScoreDisplayMainMenu()
+    {
+        if (currentScoreText)
+            currentScoreText.text = GameManager.instance.totalScoreText;
+
+        if (currentCoins)
+            currentCoins.text = GameManager.instance.totalGameCoins.ToString();
+
+        if (currentScoreTextDeadPanel)
+            currentScoreTextDeadPanel.text = GameManager.instance.totalScoreText;
+
+        if (currentCoinsDeadPanel)
+            currentCoinsDeadPanel.text = GameManager.instance.totalGameCoins.ToString();
+
+    }
+
+
 
     private void WatchAd()
     {

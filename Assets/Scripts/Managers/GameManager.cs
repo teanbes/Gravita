@@ -21,14 +21,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerController playerPrefab;
 
     [HideInInspector] public String scoreText;
+    [HideInInspector] public String totalScoreText;
     [HideInInspector] public float scoringTime;
     [HideInInspector] public bool isGameStarted;
     [HideInInspector] public int difficulty;
     [HideInInspector] public int numDifficultyLevels = 3; // test value
-    private float score;
+    [HideInInspector] public float currentLevelScore;
+    [HideInInspector] public float totalScore = 0;
+
     private float scoreMultiplier = 2.7f;
 
-    public int coins;
+    public int levelCoins;
+    public int totalGameCoins;
+
 
     private void Awake()
     {
@@ -54,20 +59,26 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 1 && isGameStarted)
         {
             scoringTime += Time.deltaTime;
-            score = (Mathf.Round(scoringTime * scoreMultiplier));
-            scoreText = score.ToString();
+            currentLevelScore = (Mathf.Round(scoringTime * scoreMultiplier));
+            scoreText = currentLevelScore.ToString();
             DifficultyLevel();
             Debug.Log("difficulty" + difficulty);
 
         }
+
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            totalScoreText = totalScore.ToString();
+        }
+
     }
 
     private void DifficultyLevel()
     {
-        if (score > 10 && score < 20) // temp values for testing
+        if (currentLevelScore > 10 && currentLevelScore < 20) // temp values for testing
             difficulty = 2;
 
-        if (score >=20) // temp values for testing
+        if (currentLevelScore >=20) // temp values for testing
             difficulty = 3;
     }
 

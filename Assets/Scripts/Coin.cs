@@ -9,7 +9,7 @@ public class Coin : MonoBehaviour
         if (collision.GetComponent<PlayerController>() != null)
         {
             AudioManager.Instance.Play("Coin");
-            GameManager.instance.coins++;
+            GameManager.instance.levelCoins++;
             Destroy(gameObject);
 
         }

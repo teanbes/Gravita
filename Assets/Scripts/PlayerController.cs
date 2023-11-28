@@ -237,8 +237,10 @@ public class PlayerController : MonoBehaviour
 
     public void RestartFromDeadPosition()
     {
+        uiManager.rewardWheelPanel.SetActive(false);
         transform.position = playerContinuePosition.position;
         tapToStartPanel.SetActive(true);
+        uiManager.scorePanel.SetActive(true);
         isDead = false;
         isStarted = false;
         sr.flipY = false; // Flip player to walk on the floor
