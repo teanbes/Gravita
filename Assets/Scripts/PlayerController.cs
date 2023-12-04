@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     // test***
     [SerializeField] private Transform playerContinuePosition;
+    private float chanceOfAdReward = 0.33f;
 
     private void Start()
     {
@@ -171,10 +172,19 @@ public class PlayerController : MonoBehaviour
         //Time.timeScale = 0;
         movingLevelGenerator.objectSpeed = 0;
         rb.velocity = new Vector2(0, 0);
-
        
         uiManager.scorePanel.SetActive(false);
         uiManager.gameOverPanel.SetActive(true);
+        // Randomize the activation of adRewardPanel with a probability of chanceOfAdReward
+        if (UnityEngine.Random.Range(0f, 1f) <= chanceOfAdReward)
+        {
+            uiManager.adRewardPanel.SetActive(true);
+        }
+        else
+        {
+            uiManager.adRewardPanel.SetActive(false);
+        }
+      
         GameManager.instance.isGameStarted = false;
        
 

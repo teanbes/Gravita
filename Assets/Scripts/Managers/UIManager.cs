@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject creditsPanel;
     [SerializeField] public GameObject scorePanel;
     [SerializeField] public GameObject rewardWheelPanel;
+    [SerializeField] public GameObject adRewardPanel;
 
     [Header("Audio Components")]
     [SerializeField] private AudioSource backgroundMusic;
