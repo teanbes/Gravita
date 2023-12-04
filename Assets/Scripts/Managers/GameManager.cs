@@ -45,6 +45,9 @@ public class GameManager : MonoBehaviour
 
         _instance = this;
         DontDestroyOnLoad(gameObject);
+
+        totalScore = PlayerPrefs.GetFloat("TotalScore", 0);
+        totalGameCoins = PlayerPrefs.GetInt("TotalGameCoins", 0);
     }
 
     private void Start()
@@ -69,6 +72,20 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 3)
         {
             totalScoreText = totalScore.ToString();
+
+            // Load Total Score from previous Session
+            if (totalScore > PlayerPrefs.GetFloat("TotalScore", 0))
+            {
+                PlayerPrefs.SetFloat("TotalScore", totalScore);
+                totalScoreText = totalScore.ToString();
+            }
+
+            // Load Total Coins from previous sessions
+            if (totalGameCoins > PlayerPrefs.GetInt("TotalGameCoins", 0))
+            {
+                PlayerPrefs.SetInt("TotalGameCoins", totalGameCoins);
+            }
+
         }
 
     }
@@ -80,6 +97,11 @@ public class GameManager : MonoBehaviour
 
         if (currentLevelScore >=20) // temp values for testing
             difficulty = 3;
+    }
+
+    public void ResetSavedData()
+    {
+        PlayerPrefs.DeleteAll();
     }
 
 }

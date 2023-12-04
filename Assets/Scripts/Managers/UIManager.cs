@@ -238,11 +238,15 @@ public class UIManager : MonoBehaviour
     public void UpdateScoreDisplayMainMenu()
     {
         if (currentScoreText)
+        {
+
             currentScoreText.text = GameManager.instance.totalScoreText;
+        }
 
         if (currentCoins)
             currentCoins.text = GameManager.instance.totalGameCoins.ToString();
 
+        // These shoud not run in Main menu
         if (currentScoreTextDeadPanel)
             currentScoreTextDeadPanel.text = GameManager.instance.totalScoreText;
 
