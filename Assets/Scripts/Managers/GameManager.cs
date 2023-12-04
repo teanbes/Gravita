@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private PlayerController playerPrefab;
+    [HideInInspector] public Color playerSkinColor;
+    [HideInInspector] public Color currentSkinColor;
+
 
     [HideInInspector] public String scoreText;
     [HideInInspector] public String totalScoreText;
@@ -46,8 +49,15 @@ public class GameManager : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(gameObject);
 
+        load();
+
         totalScore = PlayerPrefs.GetFloat("TotalScore", 0);
         totalGameCoins = PlayerPrefs.GetInt("TotalGameCoins", 0);
+
+        playerSkinColor = new Color(PlayerPrefs.GetFloat("ColorR"),
+                                       PlayerPrefs.GetFloat("ColorG"),
+                                       PlayerPrefs.GetFloat("ColorB"));
+
     }
 
     private void Start()
@@ -71,6 +81,7 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == 3)
         {
+
             totalScoreText = totalScore.ToString();
 
             // Load Total Score from previous Session
@@ -80,11 +91,7 @@ public class GameManager : MonoBehaviour
                 totalScoreText = totalScore.ToString();
             }
 
-            // Load Total Coins from previous sessions
-            if (totalGameCoins > PlayerPrefs.GetInt("TotalGameCoins", 0))
-            {
-                PlayerPrefs.SetInt("TotalGameCoins", totalGameCoins);
-            }
+            PlayerPrefs.SetInt("TotalGameCoins", totalGameCoins);
 
         }
 
@@ -102,6 +109,22 @@ public class GameManager : MonoBehaviour
     public void ResetSavedData()
     {
         PlayerPrefs.DeleteAll();
+    }
+
+    public void Save(float ColorR, float ColorG, float ColorB)
+    {
+        PlayerPrefs.SetFloat("ColorR", ColorR);
+        PlayerPrefs.SetFloat("ColorG", ColorG);
+        PlayerPrefs.SetFloat("ColorB", ColorB);
+        
+    }
+
+    public void load()
+    {
+        PlayerPrefs.GetFloat("ColorR", 1);
+        PlayerPrefs.GetFloat("ColorG", 1);
+        PlayerPrefs.GetFloat("ColorB", 1);
+
     }
 
 }

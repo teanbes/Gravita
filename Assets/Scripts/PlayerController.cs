@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        sr.color = GameManager.instance.playerSkinColor;
         movingLevelGenerator.objectSpeed = 0;
         isDead = false;
         isStarted = false;
