@@ -13,6 +13,13 @@ public struct CollorToSell
 
 }
 
+//public struct InventoryColor
+//{
+//    public Color color;
+//    public int price;
+
+//}
+
 public class UIShop : MonoBehaviour
 {
     [SerializeField] private CollorToSell[] skinColors;
@@ -20,7 +27,14 @@ public class UIShop : MonoBehaviour
     [SerializeField] private Transform  playerSkinParent;
     [SerializeField] private SpriteRenderer playerDisplay;
 
-    
+    //private InventoryColor[] inventory;
+    //private int amountOfSkinsBought;
+
+    private void Awake()
+    {
+        //amountOfSkinsBought = GameManager.instance.amountOfSkinsOwned;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +52,7 @@ public class UIShop : MonoBehaviour
         }
 
         playerDisplay.color = GameManager.instance.playerSkinColor;
+
     }
 
     public void PurchaseColor(Color color, int price)

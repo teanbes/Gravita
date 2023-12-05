@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int numDifficultyLevels = 3; // test value
     [HideInInspector] public float currentLevelScore;
     [HideInInspector] public float totalScore = 0;
+    //[HideInInspector] public int amountOfSkinsOwned = 0;
 
     private float scoreMultiplier = 2.7f;
 
@@ -57,6 +58,8 @@ public class GameManager : MonoBehaviour
         playerSkinColor = new Color(PlayerPrefs.GetFloat("ColorR"),
                                        PlayerPrefs.GetFloat("ColorG"),
                                        PlayerPrefs.GetFloat("ColorB"));
+
+        //amountOfSkinsOwned = PlayerPrefs.GetInt("TotalSkins", 0);
 
     }
 
@@ -116,7 +119,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat("ColorR", ColorR);
         PlayerPrefs.SetFloat("ColorG", ColorG);
         PlayerPrefs.SetFloat("ColorB", ColorB);
-        
+
     }
 
     public void load()
@@ -124,6 +127,8 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.GetFloat("ColorR", 1);
         PlayerPrefs.GetFloat("ColorG", 1);
         PlayerPrefs.GetFloat("ColorB", 1);
+
+        //PlayerPrefs.GetInt("TotalSkins", 0);
 
     }
 
