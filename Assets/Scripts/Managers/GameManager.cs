@@ -128,6 +128,8 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.GetFloat("ColorG", 1);
         PlayerPrefs.GetFloat("ColorB", 1);
 
+
+
         //PlayerPrefs.GetInt("TotalSkins", 0);
 
     }
